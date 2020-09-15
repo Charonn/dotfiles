@@ -1,0 +1,51 @@
+[user]
+	email = m.pawela@setlog.com
+	name = Marcel Pawela
+[alias]
+    # one-line log
+    l = log --pretty=format:%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn] --decorate --date=short
+    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+
+    live-log = "!watch -n 3 -c \"git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --remotes --tags\""
+
+    p = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    pushm = !git push -o merge_request.create
+    save = !git add -A && git commit -m '🚧 WIP SAVEPOINT [skip ci]'
+    
+    # Create commit and hard reset - restorable with git reflog (just in case)
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+    squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    a = add
+    ap = add -p
+    c = commit --verbose
+    ca = commit -a --verbose
+    cm = commit -m
+    cam = commit -a -m
+    m = commit --amend --verbose
+    
+    d = diff
+    ds = diff --stat
+    dc = diff --cached
+
+    s = status -s
+    co = checkout
+    cob = checkout -b
+    cobr = checkout --track
+    
+    # list branches sorted by last modified
+    b = !git for-each-ref --sort='-authordate' --format='%(authordate)%09%(author)%09%(objectname:short)%09%(refname)' refs/heads refs/remotes/origin | sed -e 's-<.*>--' | sed -e 's-refs/heads/-local/-' | sed -e 's-refs/remotes/origin/-remote/-'
+
+    # list aliases
+    la = "!git config --list | grep ^alias\\. | cut -c 7- | grep -Ei --color \"$1\" #"
+[core]
+	commentchar = $
+	autocrlf = input
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = 0 
+[url "ssh://git@gitlab.setlog.lan:10022/"]
+	insteadOf = https://gitlab.setlog.lan/
+[filesystem "Oracle Corporation|1.8.0_201|/home/mpawela/.Private"]
+	timestampResolution = 1040 milliseconds
+	minRacyThreshold = 0 nanoseconds
