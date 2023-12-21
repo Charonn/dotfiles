@@ -1,0 +1,20 @@
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "user_off",
+    "geometry": {
+        "height": 1036,
+        "width": 956,
+        "x": 0,
+        "y": 0
+    },
+    "marks": [],
+    "name": "i3:1:zsh - \"pawela\" ",
+    "percent": 1,
+    "swallows": [
+        {
+            "class": "^kitty$"
+        }
+    ],
+    "type": "con"
+}

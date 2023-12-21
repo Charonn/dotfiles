@@ -108,6 +108,8 @@ alias cd_hh='cd ~/workspace/hh'
 alias screen_mono='xrandr --output HDMI-3 --off && xrandr --output HDMI-1 --off'
 alias screen_triple='xrandr --output HDMI-3 --left-of HDMI-2 --auto && xrandr --output HDMI-1 --right-of HDMI-2 --auto'
 alias eclipse='~/eclipse/jee-2018-12/eclipse/eclipse'
+alias vim=nvim
+alias v=nvim
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

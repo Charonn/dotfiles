@@ -20,6 +20,8 @@ Plug 'roxma/vim-hug-neovim-rpc'
 " Java-completion
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'majutsushi/tagbar'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -27,6 +29,12 @@ let g:lightline = {'colorscheme': 'wombat', }
 set laststatus=2
 
 set nocompatible
+
+"vimwiki vimwiki.github.io
+set nocompatible
+filetype plugin on
+syntax on
+
 
 "mappings
 map <C-y> :NERDTreeToggle<CR>
@@ -74,6 +82,7 @@ set incsearch
 set showmatch
 
 " Softtabs, 2 spaces
+"
 set tabstop=2
 set shiftwidth=2
 set shiftround
@@ -137,93 +146,11 @@ autocmd CmdwinEnter * nnoremap <CR> <CR>
 autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-" <c-h> is interpreted as <bs> in neovim
-" This is a bandaid fix until the team decides how
-" they want to handle fixing it...(https://github.com/neovim/neovim/issues/2048)
-nnoremap <silent> <bs> :TmuxNavigateLeft<cr>
-
-" Navigate properly when lines are wrapped
-nnoremap j gj
-nnoremap k gk
-
-" Use tab to jump between blocks, because it's easier
-nnoremap <tab> %
-vnoremap <tab> %
-
-" Set spellfile to location that is guaranteed to exist, can be symlinked to
-" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
-
-" Always use vertical diffs
-set diffopt+=vertical
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
-
-" Load up all of our plugins
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
-filetype plugin indent on
-
-""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
-set pastetoggle=<F2> "F2 before pasting to preserve indentation
-"Copy paste to/from clipboard
-vnoremap <C-c> "*y
-map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
-map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
-
-""" MORE AWESOME HOTKEYS
-"
-"
-" Run the q macro
-nnoremap <leader>q @q
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" bind \ (backward slash) to grep shortcut
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
-" Ag will search from project root
-let g:ag_working_path_mode="r"
-
-"Map Ctrl + S to save in any mode
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
-" Also map leader + s
-map <leader>s <C-S>
-
-" Quickly close windows
-nnoremap <leader>x :x<cr>
-nnoremap <leader>X :q!<cr>
-
-" zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
-
-" resize panes
-nnoremap <silent> <Right> :vertical resize +5<cr>
-nnoremap <silent> <Left> :vertical resize -5<cr>
-nnoremap <silent> <Up> :resize +5<cr>
-nnoremap <silent> <Down> :resize -5<cr>
-
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
-
-" AUTOCOMMANDS - Do stuff
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-h> <C-w>h
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
 
 " Save whenever switching windows or leaving vim. This is useful when running
 " the tests inside vim without having to save all files first.
@@ -328,5 +255,60 @@ let g:ale_loclist = 0
        \ }
 
 " Open when no files were speficied on vim launch
+
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+function! s:insert_new_day(property)
+  let l:date = strftime('%y%m%d')
+  let l:text = [
+    \ l:date,
+    \ '',
+    \ '#-----------------------------------------------------------------------------------------------------------------------------------------------------------------#',
+    \ ''
+    \ ]
+  execute "normal! o" . substitute(join(l:text, "\n"), '\C<TMPL>', a:property, 'g') . "\<Esc>"
+endfunction
+command! -nargs=1 NewDay :call <SID>insert_new_day(<q-args>)
+
+
+function! s:insert_new_todo_date(property)
+  let l:text = ['[] (<TMPL>)']
+  execute "normal! o" . substitute(join(l:text, "\n"), '\C<TMPL>', a:property, 'g') . "\<Esc>"
+endfunction
+command! -nargs=1 NewTodoDate :call <SID>insert_new_todo_date(<q-args>)
+
+function! s:insert_new_todo()
+  let l:text = ['[]             ']
+  execute "normal! i" . join(l:text, ""). "\<Esc>"
+endfunction
+command! NewTodo :call <SID>insert_new_todo()
+
+function! s:insert_new_todo_today()
+  let l:date = strftime("%y%m%d")
+  let l:text = ['[] ']
+  let l:out=$l:text.$l:date
+  execute "normal! i" . join(l:out, "") . "\<Esc>"
+endfunction
+command! NewTodoToday :call <SID>insert_new_todo_today()
+
+nmap <Leader>wdn <Plug>VimwikiMakeDiaryNote
+
+au BufNewFile ~/*.md
+  \ call append(0,[
+    \ "# " . split(expand('%:r'),'/')[-1], "",
+  \ "## Daily checklist", "",
+  \ "- [ ] Geekbot", "",
+  \ "## Todo",  "",
+  \ "## Unplanned",  "",
+  \ "## Near Future",  "",
+  \ "## Push",  "",
+  \ "## Notes"])

@@ -1,0 +1,116 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "none",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+        "height": 1056,
+        "width": 960,
+        "x": 0,
+        "y": 0
+    },
+    "marks": [],
+    "name": "Einstellungen",
+    "percent": 0.5,
+    "swallows": [
+        {
+            "class": "^gnome\\-control\\-center$"
+            // "instance": "^gnome\\-control\\-center$",
+            // "machine": "^pawela$",
+            // "title": "^Einstellungen$"
+        }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 3 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 1 children
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.5,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "user_off",
+                    "geometry": {
+                        "height": 1036,
+                        "width": 956,
+                        "x": 4,
+                        "y": 42
+                    },
+                    "marks": [],
+                    "name": "PW.kdbx [Gesperrt] - KeePassXC",
+                    "percent": 1,
+                    "swallows": [
+                        {
+                            "class": "^KeePassXC$"
+                            // "instance": "^keepassxc$",
+                            // "machine": "^pawela$",
+                            // "title": "^PW\\.kdbx\\ \\[Gesperrt\\]\\ \\-\\ KeePassXC$"
+                        }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 1036,
+                "width": 668,
+                "x": 0,
+                "y": 0
+            },
+            "marks": [],
+            "name": "Lautstärkeregler",
+            "percent": 0.333333333333333,
+            "swallows": [
+                {
+                    "class": "^Pavucontrol$"
+                    // "instance": "^pavucontrol$",
+                    // "machine": "^pawela$",
+                    // "title": "^Lautstärkeregler$"
+                }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 1036,
+                "width": 636,
+                "x": 1282,
+                "y": 42
+            },
+            "marks": [],
+            "name": "Bluetooth-Geräte",
+            "percent": 0.166666666666667,
+            "swallows": [
+                {
+                    "class": "^Blueman\\-manager$"
+                    // "instance": "^blueman\\-manager$",
+                    // "machine": "^pawela$",
+                    // "title": "^Bluetooth\\-Geräte$"
+                }
+            ],
+            "type": "con"
+        }
+    ]
+}

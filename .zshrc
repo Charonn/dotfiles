@@ -35,7 +35,7 @@ ZSH_THEME="agnoster"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -60,7 +60,7 @@ ZSH_THEME="agnoster"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -70,7 +70,9 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git thefuck fzf zsh-autosuggestions zsh-syntax-highlighting ssh-agent)
+plugins=(git thefuck fzf zsh-autosuggestions zsh-syntax-highlighting docker docker-compose zsh-kubectl-prompt autojump ssh-agent) # ssh agent
+#RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,9 +85,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+   export EDITOR='lvim'
  else
-   export EDITOR='vim'
+   export EDITOR='lvim'
  fi
 
 # Compilation flags
@@ -101,62 +103,39 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lh='ls -lha'
-alias cd_adl='cd ~/workspace/adl'
-alias cd_bb='cd ~/workspace/bb'
-alias cd_gk='cd ~/workspace/gk'
-alias cd_lw='cd ~/workspace/lw'
-alias cd_on='cd ~/workspace/on'
-alias cd_osp='cd ~/workspace/osp'
-alias cd_spm='cd ~/workspace/spm'
-alias cd_ahl='cd ~/workspace/ahl'
-alias cd_jws='cd ~/workspace/jws'
-alias cd_mop='cd ~/workspace/mop'
-alias cd_ory='cd ~/workspace/ory'
-alias cd_pnc='cd ~/workspace/pnc'
-alias cd_hh='cd ~/workspace/hh'
-alias screen_mono='xrandr --output DP-2-1 --off && xrandr --output DP-2-2 --off'
-alias screen_triple='xrandr --output DP-2-2 --left-of DP-2-3 --auto && xrandr --output DP-2-1 --right-of DP-2-3 --auto'
-alias eclipse='~/eclipse/jee-2018-12/eclipse/eclipse'
-alias mvn8package='JAVA_HOME=/usr/lib/jvm/java-8-oracle/ mvn package'
-alias mvn8test='JAVA_HOME=/usr/lib/jvm/java-8-oracle/ mvn test'
+alias cd_scripts='cd /home/marcel/.local/share/DBeaverData/workspace6/General1/Scripts'
 alias df='df -h'
 alias du='du -h -c'
-alias headset_hq='pacmd set-card-profile bluez_card.4C_87_5D_D0_25_AB a2dp_sink'
-alias headset_mic='pacmd set-card-profile bluez_card.4C_87_5D_D0_25_AB headset_head_unit'
 alias headset_reconnect="~/connect_bluetooth_headset.sh"
-alias mono_mic='screen_mono && headset_mic'
-alias triple_hq='screen_triple && headset_hq'
 alias weather="curl wttr.in/Bochum"
 alias zshconfig="vim ~/.zshrc"
 alias sshconfig="vim ~/.ssh/config"
+alias pull_all='find . -name ".git" -type d | sed "s/\/.git//" |  xargs -I{} bash -c "echo {} && git -C {} pull"'
+alias gitm='gitmoji -c'
+alias vim=nvim
+alias v=nvim
+alias vimide="~/Shell/tmux_vimide.sh"
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh"
 
-alias on_lan='(~/josca/osca_on_tu &> /dev/null &)'
-alias on_lan_d356='(~/josca/osca_on_dynamics_tu &> /dev/null &)'
-alias on_uat='(~/josca/osca_on_uat &> /dev/null &)'
-alias on_prod='(~/josca/osca_on &> /dev/null &)'
-alias jws_lan='(~/josca/osca_jws_tu &> /dev/null &)'
-alias jws_uat='(~/josca/osca_jws_test &> /dev/null &)'
-alias jws_prod='(~/josca/osca_jws &> /dev/null &)'
-alias mop_lan='(~/josca/osca_mop_tu &> /dev/null &)'
-alias mop_online='(JAVA_HOME=~/.sdkman/candidates/java/8.0.252-amzn javaws "https://www.osca-web-mop.com/webclient/mop/osca_mop.jnlp" &> /dev/null &)'
-#alias mop_uat='(~/josca/osca_on_uat &> /dev/null &)'
-#alias mop_prod='(~/josca/osca_on &> /dev/null &)'
-alias ory_lan='(~/josca/osca_ory_tu &> /dev/null &)'
-alias ory_uat='(~/josca/osca_ory_uat &> /dev/null &)'
-alias ory_prod='(~/josca/osca_ory &> /dev/null &)'
-alias osp_lan='(~/josca/osca_osp_tu &> /dev/null &)'
-alias osp_prod='(~/josca/osca_osp &> /dev/null &)'
-alias spm_lan='(~/josca/osca_spm_tu &> /dev/null &)'
-alias spm_prod='(~/josca/osca_spm &> /dev/null &)'
-alias bb_lan='(~/josca/osca_bb_tu &> /dev/null &)'
-alias bb_prod='(~/josca/osca_bb &> /dev/null &)'
-alias dc_tu='(~/josca/osca_dc_tu &> /dev/null &)'
-alias hh_lan='(~/josca/osca_hh_tu &> /dev/null &)'
-alias hh_uat='(~/josca/osca_hh_uat &> /dev/null &)'
-alias hh_prod='(~/josca/osca_hh_prod &> /dev/null &)'
+alias cpugetavail='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors'
+alias cpushowcurrent='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias cpusetperformace='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias cpusetpowersave='echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
-alias gw='(~/josca/Groupware &> /dev/null &)'
+alias ls=lsd
+alias k=kubectl
+
 alias sip='(wine ~/Dokumente/MicroSIP-Lite-3.19.14/microsip.exe &> /dev/null &)'
+alias ideaLight='(idea -e &> /dev/null &)'
+alias todos='(cat ~/commands.txt | grep "\[\]")'
+alias idea='/home/marcel/idea-IU-232.10203.10/bin/idea.sh'
+alias protocol='(/home/marcel/Shell/protokoll.sh)'
+alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
+alias tp='/home/marcel/Shell/tp_create.sh'
+
+sshCopyFileToClipboard(){
+  ssh -n "$1" "cat $2" | xclip -selection c
+}
 
 extract () {
     if [ -f $1 ] ; then
@@ -183,10 +162,32 @@ eval $(thefuck --alias)
 
 unsetopt nomatch
 
-export PATH=$PATH:/usr/lib/go-1.14/bin
-export GOPATH=/home/marcel/go/
+export PATH=$PATH:/home/marcel/go/bin
+export GOPATH=/home/marcel/go
+export PATH=$PATH:/usr/bin/Postman
+export PATH=$PATH:/usr/bin/nvim/bin
+export PATH=$PATH:/opt/idea-IU-201.7846.76/bin
+export PATH=$PATH:/home/marcel/.local/bin
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=False
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+
+bindkey -s ^f "~/.tmux/tmux-sessionizer.sh\n"
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+        
+base16_espresso
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/marcel/.sdkman"
 [[ -s "/home/marcel/.sdkman/bin/sdkman-init.sh" ]] && source "/home/marcel/.sdkman/bin/sdkman-init.sh"
-alias config='/usr/bin/git --git-dir=/home/marcel/.cfg/ --work-tree=/home/marcel'
+
+if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+[[ -s /home/marcel/.autojump/etc/profile.d/autojump.sh ]] && source /home/marcel/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
