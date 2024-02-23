@@ -60,7 +60,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -85,9 +85,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='lvim'
+   export EDITOR='nvim'
  else
-   export EDITOR='lvim'
+   export EDITOR='nvim'
  fi
 
 # Compilation flags
@@ -176,7 +176,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 bindkey -s ^f "~/.tmux/tmux-sessionizer.sh\n"
 
 # Base16 Shell
-BASE16_SHELL="$/.config/base16-shell/"
+BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         source "$BASE16_SHELL/profile_helper.sh"
