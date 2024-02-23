@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/marcel/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,7 +103,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lh='ls -lha'
-alias cd_scripts='cd /home/marcel/.local/share/DBeaverData/workspace6/General1/Scripts'
+alias cd_scripts='cd ~/.local/share/DBeaverData/workspace6/General1/Scripts'
 alias df='df -h'
 alias du='du -h -c'
 alias headset_reconnect="~/connect_bluetooth_headset.sh"
@@ -128,10 +128,10 @@ alias k=kubectl
 alias sip='(wine ~/Dokumente/MicroSIP-Lite-3.19.14/microsip.exe &> /dev/null &)'
 alias ideaLight='(idea -e &> /dev/null &)'
 alias todos='(cat ~/commands.txt | grep "\[\]")'
-alias idea='/home/marcel/idea-IU-232.10203.10/bin/idea.sh'
-alias protocol='(/home/marcel/Shell/protokoll.sh)'
+alias idea='~/idea-IU-232.10203.10/bin/idea.sh'
+alias protocol='(~/Shell/protokoll.sh)'
 alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
-alias tp='/home/marcel/Shell/tp_create.sh'
+alias tp='~/Shell/tp_create.sh'
 
 sshCopyFileToClipboard(){
   ssh -n "$1" "cat $2" | xclip -selection c
@@ -162,13 +162,13 @@ eval $(thefuck --alias)
 
 unsetopt nomatch
 
-export PATH=$PATH:/home/marcel/go/bin
-export GOPATH=/home/marcel/go
+export PATH=$PATH:~/go/bin
+export GOPATH=~/go
 export PATH=$PATH:/usr/bin/Postman
 export PATH=$PATH:/usr/bin/nvim/bin
 export PATH=$PATH:/opt/idea-IU-201.7846.76/bin
-export PATH=$PATH:/home/marcel/.local/bin
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:~/.local/bin
+export PATH="${KREW_ROOT:-$/.krew}/bin:$PATH"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=False
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -176,7 +176,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 bindkey -s ^f "~/.tmux/tmux-sessionizer.sh\n"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
+BASE16_SHELL="$/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         source "$BASE16_SHELL/profile_helper.sh"
@@ -184,12 +184,14 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 base16_espresso
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/marcel/.sdkman"
-[[ -s "/home/marcel/.sdkman/bin/sdkman-init.sh" ]] && source "/home/marcel/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
 
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
-[[ -s /home/marcel/.autojump/etc/profile.d/autojump.sh ]] && source /home/marcel/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-source ~/.keys
+if [ -f ~/.keys ]; then
+    source ~/.keys
+fi
