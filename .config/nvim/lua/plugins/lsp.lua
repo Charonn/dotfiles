@@ -31,8 +31,8 @@ return {
         "marksman",
         "quick_lint_js",
         -- "tsserver", # requires npm to be installed
-        "jdtls",
-        "yamlls",
+        -- "jdtls",
+				"yamlls",
 				"jdtls"
       }
     })

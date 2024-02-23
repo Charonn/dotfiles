@@ -191,3 +191,5 @@ if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 [[ -s /home/marcel/.autojump/etc/profile.d/autojump.sh ]] && source /home/marcel/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
+
+source ~/.keys

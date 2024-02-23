@@ -15,6 +15,10 @@ keymap.set("n", "<leader>/", function() vim.cmd('normal gcc') end, {silent = tru
 keymap.set("v", "<leader>/", function() vim.cmd('normal gc') end, {silent = true})
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+keymap.set("n", "<Tab>", ">>")
+keymap.set("n", "<S-Tab>", "<<")
+keymap.set("v", "<Tab>", ">gv")
+keymap.set("v", "<S-Tab>", "<gv")
 
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
