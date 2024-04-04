@@ -1,4 +1,4 @@
-
+include /etc/sway/config.d/*
 set $mod Mod4
 set $modKP Mod2
 
@@ -7,7 +7,7 @@ set $lock ~/.config/sway/lock.sh
 
 ###---Styling---###
 #font xft:Source Code Pro Medium 10
-font JetBrains Mono 0 
+font JetBrains Mono 12
 
 client.focused #0d0d0d #171717 #ffffff #0d0d0d #0d0d0d
 client.unfocused #0d0d0d #363636 #888888 #292d2e #0d0d0d
@@ -172,8 +172,7 @@ output * bg $background fill
 
 #for_window [title="Keepassx*"] floating enable
 # for_window [title="(?i)keepass*"] floating enable
-for_window [title="(?i)OSCA*"] floating enable
-for_window [title="Erinnerungen"] floating enable
+#for_window [title="(?i)OSCA*"] floating enable
 
 # ###---Screenshot---###
 # ## Screenshots
@@ -191,6 +190,7 @@ exec nm-applet
 exec keepassxc
 exec nextcloud --background
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill kanshi; exec kanshi 
 exec_always wl-paste -t text --watch clipman store --histpath="~/.cache/clipman.json"
 exec_always "systemctl --user restart kanshi.service"
@@ -240,6 +240,13 @@ input * {
     xkb_variant nodeadkeys
     xkb_numlock enable
     xkb_options caps:swapescape
+    accel_profile adaptive
+    click_method button_areas
+    dwt disabled
+    # natural_scroll enabled
+    scroll_method two_finger
+    tap enabled
+    pointer_accel 0.6
 }
 
 
@@ -255,6 +262,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
 input "Logitech Wireless Mouse MX Master" {
   accel_profile adaptive
+	natural_scroll enabled
   pointer_accel 0.8
 }
 # exec "dbus-update-activation-environment --systemd DISPLAY MOZ_DBUS_REMOTE"
@@ -275,3 +283,17 @@ mode "$screenshot" {
 }
 
 bindsym $mod+Print mode "$screenshot"
+
+
+# GTK
+exec {
+	gsettings set org.gtk.Settings.FileChooser window-size '(1000, 500)'
+	gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark-v40'
+	gsettings set org.gnome.desktop.interface.wm.preferences theme 'Sweet-Dark-v40'
+	gsettings set org.gnome.desktop.interface icon-theme 'Sweet-Rainbow'
+	gsettings set org.gnome.desktop.interface cursor-size '24'
+	gsettings set org.gnome.desktop.interface font-name 'Roboto Slab 10'
+	gsettings set org.gnome.desktop.sound event-sounds 'false'
+	gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click "true"
+}

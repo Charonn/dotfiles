@@ -1,5 +1,30 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:$PATH
+export PATH=$PATH:/opt/intellij-idea-ultimate-edition/bin
+export PATH=$PATH:$HOME/google-cloud-sdk/bin
+export XDG_CURRENT_DESKTOP=sway
+
+fpath+=(
+    /usr/share/zsh/functions/Calendar
+    /usr/share/zsh/functions/Chpwd
+    /usr/share/zsh/functions/Completion
+    /usr/share/zsh/functions/Completion/Base
+    /usr/share/zsh/functions/Completion/Linux
+    /usr/share/zsh/functions/Completion/Unix
+    /usr/share/zsh/functions/Completion/X
+    /usr/share/zsh/functions/Completion/Zsh
+    /usr/share/zsh/functions/Exceptions
+    /usr/share/zsh/functions/MIME
+    /usr/share/zsh/functions/Math
+    /usr/share/zsh/functions/Misc
+    /usr/share/zsh/functions/Newuser
+    /usr/share/zsh/functions/Prompts
+    /usr/share/zsh/functions/TCP
+    /usr/share/zsh/functions/VCS_Info
+    /usr/share/zsh/functions/VCS_Info/Backends
+    /usr/share/zsh/functions/Zftp
+    /usr/share/zsh/functions/Zle
+    /usr/lib/kitty/shell-integration/zsh/completions
+)
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -128,7 +153,7 @@ alias k=kubectl
 alias sip='(wine ~/Dokumente/MicroSIP-Lite-3.19.14/microsip.exe &> /dev/null &)'
 alias ideaLight='(idea -e &> /dev/null &)'
 alias todos='(cat ~/commands.txt | grep "\[\]")'
-alias idea='~/idea-IU-232.10203.10/bin/idea.sh'
+
 alias protocol='(~/Shell/protokoll.sh)'
 alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
 alias tp='~/Shell/tp_create.sh'
@@ -136,6 +161,10 @@ alias tp='~/Shell/tp_create.sh'
 sshCopyFileToClipboard(){
   ssh -n "$1" "cat $2" | xclip -selection c
 }
+startidea() {
+    nohup idea.sh . > /dev/null 2>&1 &
+}
+
 
 extract () {
     if [ -f $1 ] ; then
@@ -162,25 +191,26 @@ eval $(thefuck --alias)
 
 unsetopt nomatch
 
-export PATH=$PATH:~/go/bin
-export GOPATH=~/go
-export PATH=$PATH:/usr/bin/Postman
-export PATH=$PATH:/usr/bin/nvim/bin
-export PATH=$PATH:/opt/idea-IU-201.7846.76/bin
-export PATH=$PATH:~/.local/bin
-export PATH="${KREW_ROOT:-$/.krew}/bin:$PATH"
-export USE_GKE_GCLOUD_AUTH_PLUGIN=False
+#export PATH=$PATH:$HOME/go/bin
+#export GOPATH=$HOME/go
+#export PATH=$PATH:/usr/bin/Postman
+#export PATH=$PATH:/usr/bin/nvim/bin
+#export PATH=$PATH:/opt/idea-IU-201.7846.76/bin
+#export PATH=$PATH:$HOME/.local/bin
+#export PATH="${KREW_ROOT:-$/.krew}/bin:$PATH"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+fpath=(/usr/share/zsh/functions/Completion $fpath)
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 
-bindkey -s ^f "~/.tmux/tmux-sessionizer.sh\n"
+bindkey -s ^f "$HOME/.tmux/tmux-sessionizer.sh\n"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         source "$BASE16_SHELL/profile_helper.sh"
-        
+
 base16_espresso
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -189,9 +219,15 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+autoload -Uz compinit && compinit -u
 
 if [ -f ~/.keys ]; then
     source ~/.keys
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/mhufnagel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mhufnagel/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc'; fi

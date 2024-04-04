@@ -10,7 +10,7 @@ opt.number = true
 -- Tabs & Indentation
 opt.tabstop = 2
 opt.shiftwidth = 2
--- opt.expandtab = false
+opt.expandtab = true
 opt.autoindent = true
 vim.bo.softtabstop = 2
 

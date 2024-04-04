@@ -32,8 +32,8 @@ return {
         "quick_lint_js",
         -- "tsserver", # requires npm to be installed
         -- "jdtls",
-				"yamlls",
-				"jdtls"
+        "yamlls",
+        "jdtls"
       }
     })
 
@@ -63,6 +63,11 @@ return {
           },
         },
       },
+    }
+    local workspace_folder = "/home/mhufnagel-local/workspace" -- Define a custom workspace folder
+    lspconfig.jdtls.setup {
+      cmd = { 'jdtls', '-data', workspace_folder },
+      -- additional configuration...
     }
   end
 }
