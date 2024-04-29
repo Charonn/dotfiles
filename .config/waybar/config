@@ -88,21 +88,22 @@
         }
       },
     },
-
     "pulseaudio": {
-      "format": "{icon} {volume:2}%",
-      "format-bluetooth": "{icon}  {volume}%",
-      "format-muted": "MUTE",
-      "format-icons": {
-        "headphones": "",
-        "default": [
-          "",
-        ""
-        ]
-      },
-      "scroll-step": 5,
-      "on-click": "pamixer -t",
-      "on-click-right": "pavucontrol"
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
     },
     "memory": {
       "interval": 5,

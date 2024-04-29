@@ -19,6 +19,7 @@ return {
     vim.g.loaded_netrwPlugin = 1
     vim.g.nvim_tree_quit_on_open = 1
     vim.g.nvim_tree_highlight_opened_files = 1
+    vim.g.nvim_tree_respect_buf_cwd = 1
     require("nvim-tree").setup(opts)
   end
 }

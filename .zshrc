@@ -155,6 +155,7 @@ alias ideaLight='(idea -e &> /dev/null &)'
 alias todos='(cat ~/commands.txt | grep "\[\]")'
 
 alias protocol='(~/Shell/protokoll.sh)'
+alias startup='(~/Shell/sway_startup.sh.sh)'
 alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
 alias tp='~/Shell/tp_create.sh'
 
@@ -213,9 +214,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 base16_espresso
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
@@ -231,3 +229,7 @@ if [ -f '/home/mhufnagel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mhufnag
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc'; fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
