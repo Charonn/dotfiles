@@ -12,6 +12,8 @@ font JetBrains Mono 12
 client.focused #0d0d0d #171717 #ffffff #0d0d0d #0d0d0d
 client.unfocused #0d0d0d #363636 #888888 #292d2e #0d0d0d
 
+set $intellij export _JAVA_AWT_WM_NONREPARENTING=1 && /opt/intellij-idea-ultimate-edition/bin/idea.sh
+
 #Hide window title bar
 default_border pixel 1
 default_floating_border pixel 1

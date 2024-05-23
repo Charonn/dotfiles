@@ -192,13 +192,6 @@ eval $(thefuck --alias)
 
 unsetopt nomatch
 
-#export PATH=$PATH:$HOME/go/bin
-#export GOPATH=$HOME/go
-#export PATH=$PATH:/usr/bin/Postman
-#export PATH=$PATH:/usr/bin/nvim/bin
-#export PATH=$PATH:/opt/idea-IU-201.7846.76/bin
-#export PATH=$PATH:$HOME/.local/bin
-#export PATH="${KREW_ROOT:-$/.krew}/bin:$PATH"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 fpath=(/usr/share/zsh/functions/Completion $fpath)
 export _JAVA_AWT_WM_NONREPARENTING=1
