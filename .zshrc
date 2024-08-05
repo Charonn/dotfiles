@@ -1,7 +1,10 @@
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:$PATH
 export PATH=$PATH:/opt/intellij-idea-ultimate-edition/bin
 export PATH=$PATH:$HOME/google-cloud-sdk/bin
-export XDG_CURRENT_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway:dark
+export GTK_THEME=Adwaita:dark  # Replace with your preferred dark theme
+export QT_STYLE_OVERRIDE=Adwaita-dark  # Replace with your preferred dark theme
+
 
 fpath+=(
     /usr/share/zsh/functions/Calendar
@@ -140,6 +143,8 @@ alias gitm='gitmoji -c'
 alias vim=nvim
 alias v=nvim
 alias vimide="~/Shell/tmux_vimide.sh"
+alias tp_bug="~/Shell/tp_create_bug.sh"
+alias tp_issue="~/Shell/tp_create.sh"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh"
 
 alias cpugetavail='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors'
@@ -155,7 +160,7 @@ alias ideaLight='(idea -e &> /dev/null &)'
 alias todos='(cat ~/commands.txt | grep "\[\]")'
 
 alias protocol='(~/Shell/protokoll.sh)'
-alias startup='(~/Shell/sway_startup.sh.sh)'
+alias startup='(~/Shell/sway_startup.sh)'
 alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
 alias tp='~/Shell/tp_create.sh'
 

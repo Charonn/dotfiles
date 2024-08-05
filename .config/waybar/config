@@ -24,7 +24,6 @@
     "pulseaudio",
     "custom/left-arrow-light",
     "custom/left-arrow-dark",
-    "custom/pipewire",
     "custom/left-arrow-light",
     "custom/left-arrow-dark",
     "memory",
@@ -107,14 +106,6 @@
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
-    },
-    "custom/pipewire": {
-        "format": "{}",
-        "interval": 1,
-        "exec": "/home/mhufnagel-local/Shell/mute-status.sh",
-        "on-click": "pactl set-source-mute $(pactl info | grep 'Default Source' | cut -d: -f2 | tr -d ' ') toggle",
-        "on-scroll-up": "pactl set-source-volume $(pactl info | grep 'Default Source' | cut -d: -f2 | tr -d ' ') +5%",
-        "on-scroll-down": "pactl set-source-volume $(pactl info | grep 'Default Source' | cut -d: -f2 | tr -d ' ') -5%"
     },
     "memory": {
       "interval": 5,
