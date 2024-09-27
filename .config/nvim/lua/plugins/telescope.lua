@@ -17,7 +17,9 @@ return {
     defaults = {
       layout_config = {
         vertical = {
-          width = 0.75
+          mirror = true,
+          width = 0.75,
+          height = 0.5
         }
       }
     }

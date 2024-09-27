@@ -48,6 +48,7 @@
 	commentchar = $
 	autocrlf = input
 	pager = delta
+	editor = vim
 [diff]
 	tool = vimdiff
 [difftool]

@@ -91,9 +91,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lh='ls -lha'
-alias vim=nvim
-alias v=nvim
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -118,20 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
-
-export GOPATH=/home/marcel/go
-export PATH="/usr/local/go/bin:$PATH"
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
-
-eval $(thefuck --alias)
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/marcel/.sdkman"
-[[ -s "/home/marcel/.sdkman/bin/sdkman-init.sh" ]] && source "/home/marcel/.sdkman/bin/sdkman-init.sh"
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

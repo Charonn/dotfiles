@@ -4,6 +4,7 @@ export PATH=$PATH:$HOME/google-cloud-sdk/bin
 export XDG_CURRENT_DESKTOP=sway:dark
 export GTK_THEME=Adwaita:dark  # Replace with your preferred dark theme
 export QT_STYLE_OVERRIDE=Adwaita-dark  # Replace with your preferred dark theme
+export WEBKIT_DISABLE_COMPOSITING_MODE=1
 
 
 fpath+=(
@@ -98,7 +99,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git thefuck fzf zsh-autosuggestions zsh-syntax-highlighting docker docker-compose zsh-kubectl-prompt autojump ssh-agent) # ssh agent
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting docker docker-compose zsh-kubectl-prompt autojump ssh-agent) # ssh agent
 #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
@@ -140,9 +141,7 @@ alias zshconfig="vim ~/.zshrc"
 alias sshconfig="vim ~/.ssh/config"
 alias pull_all='find . -name ".git" -type d | sed "s/\/.git//" |  xargs -I{} bash -c "echo {} && git -C {} pull"'
 alias gitm='gitmoji -c'
-alias vim=nvim
-alias v=nvim
-alias vimide="~/Shell/tmux_vimide.sh"
+alias ide="~/Shell/tmux_vimide.sh"
 alias tp_bug="~/Shell/tp_create_bug.sh"
 alias tp_issue="~/Shell/tp_create.sh"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh"
@@ -163,7 +162,6 @@ alias protocol='(~/Shell/protokoll.sh)'
 alias startup='(~/Shell/sway_startup.sh)'
 alias mountTeamdraft='rclone mount teamdraft: /mnt/teamdraft --allow-non-empty --vfs-cache-mode writes --daemon'
 alias tp='~/Shell/tp_create.sh'
-
 sshCopyFileToClipboard(){
   ssh -n "$1" "cat $2" | xclip -selection c
 }
@@ -193,7 +191,7 @@ extract () {
     fi
 }
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 
 unsetopt nomatch
 
@@ -231,3 +229,4 @@ if [ -f '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/m
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

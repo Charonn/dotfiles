@@ -46,6 +46,28 @@ return {
         { name = "path" }, -- file system paths
       }),
     })
+    -- Define custom snippet for changelog
+    local s = luasnip.snippet
+    local t = luasnip.text_node
+    local f = luasnip.function_node
+
+    -- Snippet for changelog
+    luasnip.add_snippets("all", {
+      s("tbd", {
+        t({
+          "## TBD (TBD)",
+          "### Features",
+          "",
+          "### Bugfixes",
+          "",
+          "### Changes",
+        })
+      }),
+      s("date", {
+        f(function()
+          return os.date("%Y-%m-%d")  -- Get the current date in YYYY-MM-DD format
+        end)
+      })
+    })
   end,
  }
-

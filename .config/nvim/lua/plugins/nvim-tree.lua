@@ -1,4 +1,3 @@
--- File Explorer / Tree
 return {
   'nvim-tree/nvim-tree.lua',
   dependencies = {
@@ -7,8 +6,9 @@ return {
   opts = {
     actions = {
       open_file = {
+        quit_on_open = true,  -- This should be directly under open_file
         window_picker = {
-          enable = false
+          enable = false,  -- window_picker settings go here
         },
       }
     },
