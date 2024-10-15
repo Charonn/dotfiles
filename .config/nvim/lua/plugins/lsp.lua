@@ -8,6 +8,8 @@ return {
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
 
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+
     -- Useful status updates for LSP
     { 'j-hui/fidget.nvim', opts = {} },
 
@@ -27,15 +29,25 @@ return {
         "lua_ls",
         -- "intelephense", # requires npm to be installed
         "jsonls",
+        "jinja_lsp",
         "lemminx",
         "marksman",
         "quick_lint_js",
         -- "tsserver", # requires npm to be installed
-        -- "jdtls",
         "yamlls",
         "jdtls"
       }
     })
+
+    require('mason-tool-installer').setup({
+      ensure_installed = {
+        "ansible-language-server",
+        "java-debug-adapter",
+        "java-test"
+      }
+    })
+
+    vim.api.nvim_command('MasonToolsInstall')
 
     local lspconfig = require('lspconfig')
     local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -46,10 +58,12 @@ return {
     -- Call setup on each LSP server
     require('mason-lspconfig').setup_handlers({
       function(server_name)
-        lspconfig[server_name].setup({
-          on_attach = lsp_attach,
-          capabilities = lsp_capabilities,
-        })
+        if server_name ~= "jdtls" then
+          lspconfig[server_name].setup({
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+          })
+        end
       end
     })
 
@@ -64,10 +78,19 @@ return {
         },
       },
     }
-    local workspace_folder = "/home/mhufnagel-local/workspace" -- Define a custom workspace folder
-    lspconfig.jdtls.setup {
-      cmd = { 'jdtls', '-data', workspace_folder },
-      -- additional configuration...
+    -- local workspace_folder = "/home/mhufnagel-local/workspace" -- Define a custom workspace folder
+    -- lspconfig.jdtls.setup {
+    --   cmd = { 'jdtls', '-data', workspace_folder },
+    --   -- additional configuration...
+    -- }
+    lspconfig.jinja_lsp.setup {
+      cmd = { vim.fn.expand('~/.local/share/nvim/mason/bin/jinja-lsp') },  -- Adjust the path if needed
+      filetypes = { 'jinja', 'html', 'htmldjango', 'j2' },  -- Ensure correct filetypes
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.cwd()
+      end,
+      capabilities = lsp_capabilities,
+      on_attach = lsp_attach,
     }
   end
 }

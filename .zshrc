@@ -102,6 +102,10 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting docker docker-compose zsh-kubectl-prompt autojump ssh-agent) # ssh agent
 #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+# Add a newline before each prompt
+PROMPT=$'%{\n%}'"$PROMPT"
+# Add a newline before each prompt
+preexec() { print -P "" }
 
 source $ZSH/oh-my-zsh.sh
 
@@ -219,6 +223,7 @@ autoload -Uz compinit && compinit -u
 if [ -f ~/.keys ]; then
     source ~/.keys
 fi
+source $HOME/.cargo/env
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/mhufnagel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mhufnagel/google-cloud-sdk/path.zsh.inc'; fi
@@ -230,3 +235,18 @@ if [ -f '/home/mhufnagel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/m
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+
+prompt_agnoster_main() {
+  # Keep the existing agnoster theme prompt
+  prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@%m"
+  prompt_segment blue $CURRENT_FG '%~'
+  if [[ $RETVAL -ne 0 ]]; then
+    prompt_segment red $CURRENT_FG '✘'
+  fi
+
+  # Add newline before the cursor
+  prompt_segment black default "%(!.%{%F{yellow}%}.)%{\n%}"
+
+  # Prepare the cursor position for the next line
+  prompt_segment black default "➜"
+}

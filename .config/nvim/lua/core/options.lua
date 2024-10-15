@@ -28,12 +28,15 @@ opt.cursorline = true
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
+opt.colorcolumn = "140"
 
 -- Backspace
 opt.backspace = "indent,eol,start"
 
 -- Clipboard
 opt.clipboard:append("unnamedplus")
+vim.o.clipboard = "unnamedplus"
+
 
 -- Split Windows
 opt.splitright = true
@@ -52,4 +55,13 @@ opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
 
 opt.listchars:append({tab=">-"})
 opt.list = true
+
+opt.scrolloff = 8
+vim.o.timeoutlen = 300
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
+vim.o.laststatus = 2
+vim.o.backup = false
+vim.o.swapfile = false
+
 

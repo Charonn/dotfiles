@@ -1,3 +1,6 @@
+local wk = require("which-key")
+
+-- Global keymaps
 -- Set leader key to space
 vim.g.mapleader = " "
 
@@ -77,6 +80,18 @@ keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_
 keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
 keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({ default_text = ":method:" }) end)
+wk.add({
+  -- File-related keymaps
+  {"<leader>f", group = "File" },
+  {"<leader>ff", desc = "Find Files" },
+  {"<leader>fg", desc = "Grep in Files" },
+  {"<leader>fb", desc = "Open Buffers" },
+  {"<leader>fh", desc = "Help Tags" },
+  {"<leader>fs", desc = "Grep in Buffer" },
+  {"<leader>fo", desc = "LSP document sybmols" },
+  {"<leader>fi", desc = "LSP incoming calls" },
+  {"<leader>fm", desc = "Grep mothod" },
+})
 
 -- Git-blame
 -- keymap.set("n", "<leader>Gp", ":Gitsigns preview_hunk<CR>") -- toggle git blame
@@ -98,6 +113,21 @@ keymap.set("n", "<leader>h7", function() require("harpoon.ui").nav_file(7) end)
 keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end)
 keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
 
+wk.add({
+  -- File-related keymaps
+  {"<leader>h", group = "File" },
+  {"<leader>ha", desc = "Add File" },
+  {"<leader>hh", desc = "Menu" },
+  {"<leader>h1", desc = "Nav File 1" },
+  {"<leader>h2", desc = "Nav File 2" },
+  {"<leader>h3", desc = "Nav File 3" },
+  {"<leader>h4", desc = "Nav File 4" },
+  {"<leader>h5", desc = "Nav File 5" },
+  {"<leader>h6", desc = "Nav File 6" },
+  {"<leader>h7", desc = "Nav File 7" },
+  {"<leader>h8", desc = "Nav File 8" },
+  {"<leader>h9", desc = "Nav File 9" },
+})
 -- Vim REST Console
 keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
@@ -109,10 +139,12 @@ keymap.set('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 keymap.set('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 keymap.set('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>')
+keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>')
 keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>')
 keymap.set('v', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>')
-keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+keymap.set('n', '<leader>ga', function()
+  require("actions-preview").code_actions()
+end, { noremap = true, silent = true })
 keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
 keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
@@ -150,3 +182,16 @@ keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { noremap = true })
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { noremap = true })
 keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({ default_text = ":E:" }) end)
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { noremap = true })
+
+
+keymap.set("n", "<leader>tc", function()
+  if vim.bo.filetype == "java" then
+    require('jdtls').test_class()
+  end
+end)
+
+keymap.set("n", "<leader>tm", function()
+  if vim.bo.filetype == "java" then
+    require('jdtls').test_nearest_method()
+  end
+end)
