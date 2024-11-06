@@ -25,6 +25,7 @@ return {
         "cssls",
         "html",
         "gradle_ls",
+        "gopls",
         -- "groovyls",
         "lua_ls",
         -- "intelephense", # requires npm to be installed

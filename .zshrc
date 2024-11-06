@@ -250,3 +250,6 @@ prompt_agnoster_main() {
   # Prepare the cursor position for the next line
   prompt_segment black default "➜"
 }
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terragrunt terragrunt

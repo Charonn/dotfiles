@@ -1,4 +1,11 @@
 include /etc/sway/config.d/*
+
+exec export GDK_BACKEND wayland
+exec export QT_QPA_PLATFORM wayland
+exec export CLUTTER_BACKEND wayland
+exec export _JAVA_AWT_WM_NONREPARENTING 1
+exec export AWT_TOOLKIT MToolkit
+
 set $mod Mod4
 set $modKP Mod2
 
@@ -46,6 +53,7 @@ bindsym $mod+Shift+l move right
 bindsym $mod+f fullscreen toggle
 
 # Here for testing
+bindsym --release Ctrl+Alt+period nop
 bindsym $mod+Shift+s layout stacking
 bindsym $mod+Shift+d layout default
 bindsym $mod+Shift+t layout tabbed

@@ -116,3 +116,5 @@ if ! shopt -oq posix; then
   fi
 fi
 . "$HOME/.cargo/env"
+
+complete -C /usr/bin/terragrunt terragrunt

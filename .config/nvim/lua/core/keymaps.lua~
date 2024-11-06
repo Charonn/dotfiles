@@ -12,10 +12,6 @@ keymap.set("i", "ii", "<ESC>")           -- exit insert mode with ii
 keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>") -- quit without saving
 keymap.set("n", "<leader>ww", ":w<CR>")  -- save
--- Map Ctrl+S to save the file in normal, insert, and visual mode
-keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
-keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { noremap = true, silent = true })
-keymap.set('v', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true })
 keymap.set("n", "dd", "\"_dd")
 keymap.set("v", "d", "\"_d")
 keymap.set("n", "<leader>/", function() vim.cmd('normal gcc') end, { silent = true })
