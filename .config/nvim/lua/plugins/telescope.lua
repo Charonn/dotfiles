@@ -39,6 +39,15 @@ return {
       }
     },
     pickers = {
+      find_files = {
+        find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+      },
+      grep_string = {
+        additional_args = {"--hidden"}
+      },
+      live_grep = {
+        additional_args = {"--hidden"}
+      },
       -- Configure the picker for LSP code actions
       lsp_code_actions = {
         theme = "dropdown", -- Use the dropdown theme for code actions
@@ -46,6 +55,10 @@ return {
           width = 0.5,
           height = 0.4,
         },
+      },
+      buffers = {
+        ignore_current_buffer = true,
+        sort_lastused = true,
       },
     },
   }

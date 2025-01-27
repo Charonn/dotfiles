@@ -1,15 +1,14 @@
 #!/bin/bash
-# Script to check if any microphone is muted
 
-# List all sources and their mute status
-pactl list sources | grep -e 'Mute:' -e 'Name:' > /tmp/mic_mutes.txt
+# Get the default source
+DEFAULT_SOURCE=$(pactl info | grep "Default Source" | awk '{print $3}')
 
-# Check for any muted microphones
-if grep -B1 'Mute: yes' /tmp/mic_mutes.txt | grep -q 'Name:'; then
-    echo ""  # FontAwesome icon for muted mic (adjust as needed)
+# Get the mute status
+MUTE_STATUS=$(pactl list sources | grep -A 15 "Name: $DEFAULT_SOURCE" | grep "Mute:" | awk '{print $2}')
+
+# Output icon and text based on mute status
+if [[ "$MUTE_STATUS" == "yes" ]]; then
+    echo "{\"text\": \"\", \"tooltip\": \"Microphone is muted\", \"class\": \"muted\"}"
 else
-    echo ""  # FontAwesome icon for unmuted mic
+    echo "{\"text\": \"\", \"tooltip\": \"Microphone is unmuted\", \"class\": \"unmuted\"}"
 fi
-
-# Clean up
-rm /tmp/mic_mutes.txt

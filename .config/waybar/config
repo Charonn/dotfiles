@@ -1,6 +1,7 @@
 // -*- mode: json -*-
 
 {
+  "font": "FiraCode Nerd Font:size=10",
   "layer": "top",
     "position": "top",
 
@@ -32,6 +33,9 @@
     "cpu",
     "custom/left-arrow-light",
     "custom/left-arrow-dark",
+    "custom/mic-status",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
     "battery",
     "custom/left-arrow-light",
     "custom/left-arrow-dark",
@@ -40,11 +44,17 @@
     "custom/left-arrow-dark",
     "tray"
     ],
-
-    "custom/left-arrow-dark": {
-      "format": "",
-      "tooltip": false
-    },
+    "custom/test-arrow": {
+  "format": ""
+},
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+//    "custom/left-arrow-dark": {
+//      "format": "",
+//      "tooltip": false
+//    },
     "custom/left-arrow-light": {
       "format": "",
       "tooltip": false
@@ -57,7 +67,12 @@
       "format": "",
       "tooltip": false
     },
-
+    "custom/mic-status": {
+      "exec": "~/.config/waybar/mute_status.sh",
+      "return-type": "json",
+      "interval": 1,
+      "tooltip": true
+    },
     "sway/workspaces": {
       "disable-scroll": true,
       "format": "{name}"

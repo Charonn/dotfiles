@@ -53,8 +53,27 @@ return {
     local lspconfig = require('lspconfig')
     local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
     local lsp_attach = function(client, bufnr)
-      -- Create your keybindings here...
+			-- Add gopls specific formatting on save
+      if client.name == "gopls" then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = vim.api.nvim_create_augroup("GoFormat", { clear = true }),
+          buffer = bufnr,
+          callback = function()
+						print("Formatting with gopls")
+            vim.lsp.buf.format({ async = true })
+          end,
+        })
+      end     -- Create your keybindings here...
     end
+		require'lspconfig'.gopls.setup{
+			settings = {
+				gopls = {
+					usePlaceholders = true,
+					gofumpt = true, -- If you prefer to use gofumpt for formatting
+				}
+			},
+			on_attach = lsp_attach,  -- Ensure your on_attach function is used
+		}
 
     -- Call setup on each LSP server
     require('mason-lspconfig').setup_handlers({

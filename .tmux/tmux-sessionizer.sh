@@ -3,7 +3,9 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/.config/ ~/workspace/ -mindepth 1 -maxdepth 4 -type d -path '$HOME/workspace/jdtls-workspace*' -prune -o -type d | fzf)
+	selected=$(find ~/ ~/.config/ ~/workspace/ -mindepth 1 -maxdepth 4 \
+  \( -path "$HOME/workspace/jdtls-workspace*" -o -path "$HOME/jdtls-workspace*" \) -prune \
+  -o -type d -readable -print | fzf)
 fi
 
 if [[ -z $selected ]]; then

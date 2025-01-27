@@ -13,6 +13,7 @@ set -x MOZ_ENABLE_WAYLAND 1 firefox
 alias k=kubectl
 
 fish_add_path $HOME/google-cloud-sdk/bin
+fish_add_path /opt/idea-IU-243.21565.193/bin/
 
 if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
     exec sway > ~/.sway.log 2>&1
