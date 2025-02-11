@@ -1,5 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:$PATH
 export PATH=$PATH:/opt/idea-IU-243.21565.193/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/opt/intellij-idea-ultimate-edition/bin
 export PATH=$PATH:$HOME/google-cloud-sdk/bin
 export XDG_CURRENT_DESKTOP=sway:dark
 export GTK_THEME=Adwaita:dark  # Replace with your preferred dark theme
