@@ -4,7 +4,6 @@ return {
     position = "bottom", -- Ensure it opens at the bottom
     height = 10, -- Adjust height as needed
     mode = "workspace_diagnostics", -- Default mode (adjust if needed)
-    auto_open = true, -- Automatically open when there are diagnostics
   },
   keys = {
     { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },

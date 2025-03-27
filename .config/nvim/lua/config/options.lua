@@ -3,3 +3,5 @@
 -- Add any additional options here
 vim.g.lazyvim_mini_snippets_in_completion = true
 vim.g.lazyvim_picker = "telescope"
+local o = vim.opt
+o.spelllang = { "en", "de" }

@@ -4,6 +4,9 @@
 
 local keymap = vim.keymap
 
+keymap.set("n", "<leader>y", '"+yy')
+keymap.set("v", "<leader>y", '"+y')
+
 keymap.set("n", "<leader>gg", "<cmd>lua vim.lsp.buf.hover()<CR>")
 keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
