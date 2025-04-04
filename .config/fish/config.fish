@@ -9,6 +9,7 @@ set -x GTK_THEME Adwaita:dark # Replace with your preferred dark theme
 set -x QT_STYLE_OVERRIDE Adwaita-dark # Replace with your preferred dark theme
 set -x WEBKIT_DISABLE_COMPOSITING_MODE 1
 set -x MOZ_ENABLE_WAYLAND 1 firefox
+set -x GOPRIVATE gitlab.setlog.lan
 # Set GTK dark theme
 set -Ux GTK_THEME Adwaita-dark
 set -x VAULT_ADDR https://vault.setlog.lan
