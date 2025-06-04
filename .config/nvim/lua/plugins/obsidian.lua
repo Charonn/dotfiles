@@ -40,6 +40,11 @@ return {
       -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
       template = nil,
     },
+    weekly_notes = {
+      folder = "Periodic Notes/Weekly",
+      date_format = "%Y-W%V", -- e.g. 2025-W20
+      template = "weekly.md",
+    },
     -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
     completion = {
       -- Set to false to disable completion.

@@ -1,0 +1,15 @@
+-- ~/.config/nvim/lua/plugins/neo-tree.lua
+return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true, -- show hidden items (dimmed) instead of hiding them
+          hide_dotfiles = false, -- do not hide dotfiles (files/folders starting with a dot)
+          hide_gitignored = false, -- do not hide files ignored by Git
+        },
+      },
+    },
+  },
+}

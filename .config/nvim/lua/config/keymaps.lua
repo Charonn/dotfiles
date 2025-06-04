@@ -25,7 +25,30 @@ keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
+keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
+keymap.set("n", "<leader>qN", ":cprev<CR>") -- jump to prev quickfix list item
 
+vim.keymap.set("n", "<leader>l", function()
+  -- Restart all LSPs
+  vim.cmd("LspRestart")
+
+  -- Show notification
+  vim.notify("LSP restarted", vim.log.levels.INFO, { title = "LSP" })
+end, { desc = "Restart LSP and notify" })
+
+vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Obsidian: Today" })
+vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "Obsidian: Yesterday" })
+vim.keymap.set("n", "<leader>om", "<cmd>ObsidianTomorrow<CR>", { desc = "Obsidian: Tomorrow" })
+vim.keymap.set("n", "<leader>ow", "<cmd>ObsidianThisWeek<CR>", { desc = "Obsidian: This Week" })
+local wk = require("which-key")
+wk.add({
+  -- File-related keymaps
+  { "<leader>o", group = "Obsidian" },
+  { "<leader>t", desc = "Today" },
+  { "<leader>y", desc = "Yesterday" },
+  { "<leader>m", desc = "Tomorrow" },
+  { "<leader>w", desc = "This week" },
+})
 local nvim_tmux_nav = require("nvim-tmux-navigation")
 
 vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
