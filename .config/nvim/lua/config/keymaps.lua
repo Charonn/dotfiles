@@ -39,7 +39,8 @@ end, { desc = "Restart LSP and notify" })
 vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Obsidian: Today" })
 vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "Obsidian: Yesterday" })
 vim.keymap.set("n", "<leader>om", "<cmd>ObsidianTomorrow<CR>", { desc = "Obsidian: Tomorrow" })
-vim.keymap.set("n", "<leader>ow", "<cmd>ObsidianThisWeek<CR>", { desc = "Obsidian: This Week" })
+vim.keymap.set("n", "<leader>ow", "<cmd>ObsidianDailies<CR>", { desc = "Obsidian: This Week" })
+vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Obsidian: This Week" })
 local wk = require("which-key")
 wk.add({
   -- File-related keymaps

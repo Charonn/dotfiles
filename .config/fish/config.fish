@@ -24,6 +24,9 @@ fish_add_path /usr/local/go/bin
 fish_add_path $HOME/go/bin
 fish_add_path $GOPATH/bin
 fish_add_path /opt/nvim-linux-x86_64/bin
+if test -f ~/.config/fish/secrets.fish
+    source ~/.config/fish/secrets.fish
+end
 
 
 if test -z "$DISPLAY" -a (tty) = /dev/tty1

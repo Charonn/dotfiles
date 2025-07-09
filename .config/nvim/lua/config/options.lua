@@ -11,3 +11,9 @@ opt.scrolloff = 8
 vim.g.markdown_syntax_conceal = 0
 vim.g.vim_markdown_conceal = 0
 vim.g.vim_markdown_conceal_code_blocks = 0
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif" },
+  callback = function()
+    vim.bo.filetype = "image"
+  end,
+})
