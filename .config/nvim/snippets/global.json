@@ -3,6 +3,24 @@
     "prefix": "date",
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
   },
+
+  "Changelog": {
+    "prefix": "changelog",
+    "body": [
+      "## TBD (TBD)",
+      "### Features",
+      "",
+      "### Bugfixes",
+      "",
+      "### Changes"
+    ]
+  },
+  "Release": {
+    "prefix": "release",
+    "body": [
+      "## $1 (${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE})"
+    ]
+  },
   "Basic":        { "prefix": "ba", "body": "T1=$1 T2=$2 T0=$0"         },
   "Placeholders": { "prefix": "pl", "body": "T1=${1:aa}\nT2=${2:<$1>}"  },
   "Choices":      { "prefix": "ch", "body": "T1=${1|a,b|} T2=${2|c,d|}" },
@@ -13,3 +31,4 @@
     "body": [ "T1=${1:$RANDOM}", "T3=${3:$1_${2:$1}}", "T2=$2" ]
   }
 }
+

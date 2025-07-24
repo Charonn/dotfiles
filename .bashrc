@@ -118,3 +118,7 @@ fi
 . "$HOME/.cargo/env"
 
 complete -C /usr/bin/terragrunt terragrunt
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/mhufnagel/.sdkman"
+[[ -s "/home/mhufnagel/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mhufnagel/.sdkman/bin/sdkman-init.sh"
