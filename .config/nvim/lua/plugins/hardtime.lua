@@ -1,5 +1,5 @@
 return {
-  enabled = false
+  enabled = false,
   "m4xshen/hardtime.nvim",
   lazy = false,
   dependencies = { "MunifTanjim/nui.nvim" },
