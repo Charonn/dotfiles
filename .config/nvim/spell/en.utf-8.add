@@ -40,6 +40,7 @@ Locodes
 locode
 BusinessPartnerRelation
 Rhenus
+<<<<<<< HEAD
 PoC
 Laurenz
 auf's
@@ -72,3 +73,4 @@ FreeMarker
 Nginx
 Thymeleaf
 Tailwindcss
+immich

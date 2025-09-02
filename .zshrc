@@ -7,6 +7,9 @@ export XDG_CURRENT_DESKTOP=sway:dark
 export GTK_THEME=Adwaita:dark  # Replace with your preferred dark theme
 export QT_STYLE_OVERRIDE=Adwaita-dark  # Replace with your preferred dark theme
 export WEBKIT_DISABLE_COMPOSITING_MODE=1
+# Add these lines to your shell profile
+export LUA_PATH='./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;/home/marcel/.luarocks/share/lua/5.1/?.lua;/home/marcel/.luarocks/share/lua/5.1/?/init.lua'
+export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home/marcel/.luarocks/lib/lua/5.1/?.so'
 
 
 fpath+=(

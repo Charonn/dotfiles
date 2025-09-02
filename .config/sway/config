@@ -282,7 +282,7 @@ input "Logitech Wireless Mouse MX Master" {
 # exec "dbus-update-activation-environment --systemd DISPLAY MOZ_DBUS_REMOTE"
 # Screen capture
 #
-set $screenshot 1 selected, 2 whole, 3 selected clipboard, 4 whole clipboard, 5 swappy
+set $screenshot 2 selected, 2 whole, 3 selected clipboard, 4 whole clipboard, 5 swappy
 mode "$screenshot" {
     bindsym 1 exec 'grim -g "$(slurp)" ~/Bilder/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
     bindsym 2 exec 'grim ~/Bilder/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
@@ -296,7 +296,7 @@ mode "$screenshot" {
     bindsym $mod+Print mode "default"
 }
 
-bindsym $mod+Print mode "$screenshot"
+bindsym $mod+Print exec 'grim -g "$(slurp)" - | wl-copy'
 
 
 # GTK
