@@ -15,8 +15,6 @@ return {
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
   opts = {
     workspaces = {
@@ -24,6 +22,20 @@ return {
         name = "personal",
         path = "~/Nextcloud/obsidian",
       },
+    },
+    note_id_func = function(title)
+      if title ~= nil then
+        return title:gsub("[^%w%s_-]", ""):gsub("%s+", "-"):lower()
+      else
+        return tostring(os.time())
+      end
+    end,
+    -- Add this section for image attachments
+    attachments = {
+      -- The folder to store images in, relative to the vault root
+      img_folder = "assets/imgs",
+      -- This will create a subfolder with the same name as the note
+      -- img_folder = "assets/imgs/{notename}",
     },
 
     notes_subdir = "Zettelkasten",
@@ -61,6 +73,5 @@ return {
       -- A map for custom variables, the key should be the variable and the value a function
       substitutions = {},
     },
-    -- see below for full list of options 👇
   },
 }

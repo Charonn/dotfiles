@@ -1,6 +1,7 @@
 return {
   {
     "vhyrro/luarocks.nvim",
+    enabled = false
     priority = 1001, -- this plugin needs to run before anything else
     opts = {
       rocks = { "magick" },
@@ -8,15 +9,7 @@ return {
   },
   {
     "3rd/image.nvim",
-    dependencies = { "luarocks.nvim" },
-    config = function()
-      require("image").setup({
-        backend = "kitty", -- or "ueberzug"
-        max_height_window_percentage = 50,
-        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.svg" },
-      })
-    end,
-    "3rd/image.nvim",
+    enabled = false
     -- cond = false,
     event = "VeryLazy",
     opts = {
@@ -27,7 +20,7 @@ return {
           enabled = true,
           clear_in_insert_mode = true,
           download_remote_images = true,
-          only_render_image_at_cursor = true,
+          only_render_image_at_cursor = false,
           filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
         },
         neorg = {
