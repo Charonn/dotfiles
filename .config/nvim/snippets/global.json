@@ -3,6 +3,10 @@
     "prefix": "date",
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
   },
+  "DateTime": {
+    "prefix": "datetime",
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}"
+  },
 
   "Changelog": {
     "prefix": "changelog",
