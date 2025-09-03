@@ -6,6 +6,14 @@ local keymap = vim.keymap
 
 keymap.set("n", "<leader>y", '"+yy')
 keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>r", function()
+  -- Get the word under the cursor
+  local word = vim.fn.expand("<cword>")
+  -- Escape it for literal search (very nomagic)
+  word = "\\V" .. word
+  -- Pre-fill the command line for the whole file
+  vim.fn.feedkeys(":%s/" .. word .. "/")
+end, { noremap = true, silent = true })
 
 keymap.set("n", "grg", "<cmd>lua vim.lsp.buf.hover()<CR>")
 keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<CR>")

@@ -17,7 +17,11 @@ set -x VAULT_ADDR https://vault.setlog.lan
 set -Ux QT_QPA_PLATFORMTHEME qt5ct
 
 alias k=kubectl
+alias ssh="kitty +kitten ssh"
 
+if type -q bass
+    bass source ~/.portable_aliases
+end
 fish_add_path $HOME/google-cloud-sdk/bin
 fish_add_path /opt/idea-IU-243.21565.193/bin/
 fish_add_path /usr/local/go/bin

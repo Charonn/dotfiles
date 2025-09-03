@@ -40,7 +40,6 @@ Locodes
 locode
 BusinessPartnerRelation
 Rhenus
-<<<<<<< HEAD
 PoC
 Laurenz
 auf's
@@ -74,4 +73,9 @@ Nginx
 Thymeleaf
 Tailwindcss
 immich
-immich
+Editierbarkeit
+Artifactory
+xml
+json
+unpoly
+>>>>>>> Stashed changes
