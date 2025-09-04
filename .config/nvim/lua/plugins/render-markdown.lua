@@ -1,19 +1,19 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  -- opts = {
-  --   code = {
-  --     sign = false,
-  --     width = "block",
-  --     right_pad = 1,
-  --   },
-  --   heading = {
-  --     sign = false,
-  --     icons = {},
-  --   },
-  --   checkbox = {
-  --     enabled = false,
-  --   },
-  -- },
+  opts = {
+    bullet = {
+      -- add a space between bullet marker and text
+      right_pad = 1,
+    },
+    -- Leave YAML front matter un-rendered to keep natural spacing
+    yaml = {
+      enabled = false,
+    },
+    -- Example: adjust code block padding if desired
+    -- code = {
+    --   right_pad = 1,
+    -- },
+  },
   ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
   config = function(_, opts)
     require("render-markdown").setup(opts)

@@ -13,3 +13,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.diagnostic.enable(false)
   end,
 })
+
+-- Recognize common Jinja file extensions
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.j2", "*.jinja", "*.jinja2", "**/templates/*.html" },
+  callback = function()
+    vim.bo.filetype = "jinja"
+  end,
+})

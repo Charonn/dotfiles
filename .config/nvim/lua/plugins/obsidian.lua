@@ -1,7 +1,16 @@
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
-  lazy = false,
+  -- Also load on commands so keymaps work everywhere
+  cmd = {
+    "ObsidianToday",
+    "ObsidianYesterday",
+    "ObsidianTomorrow",
+    "ObsidianNew",
+    "ObsidianDailies",
+    "ObsidianSearch",
+  },
+  -- lazy-load via event
   -- ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   event = {

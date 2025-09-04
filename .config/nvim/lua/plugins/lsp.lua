@@ -1,116 +1,74 @@
 return {
-  -- LSP Configuration
-  "neovim/nvim-lspconfig",
-  event = "VeryLazy",
-  dependencies = {
-    -- LSP Manager Plugins
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
+  -- Extend LSP servers via LazyVim opts
+  {
+    "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    dependencies = {
+      { "j-hui/fidget.nvim", opts = {} },
+      { "folke/neodev.nvim" },
+    },
+    ---@param opts lspconfig.options
+    opts = function(_, opts)
+      opts.servers = opts.servers or {}
 
-    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-
-    -- Useful status updates for LSP
-    { "j-hui/fidget.nvim", opts = {} },
-
-    -- Additional lua configuration, makes nvim stuff amazing!
-    { "folke/neodev.nvim" },
-  },
-  config = function()
-    require("mason").setup()
-    require("mason-lspconfig").setup({
-      -- Update this list to the language servers you need installed
-      ensure_installed = {
-        "bashls",
-        "cssls",
-        "html",
-        "gradle_ls",
-        "gopls",
-        -- "groovyls",
-        "lua_ls",
-        -- "intelephense", # requires npm to be installed
-        "jsonls",
-        "lemminx",
-        "marksman",
-        "quick_lint_js",
-        "templ",
-        "tailwindcss",
-        -- "tsserver", # requires npm to be installed
-        "yamlls",
-        "jdtls",
-      },
-    })
-
-    require("mason-tool-installer").setup({
-      ensure_installed = {
-        "ansible-language-server",
-        "java-debug-adapter",
-        "java-test",
-      },
-    })
-
-    vim.api.nvim_command("MasonToolsInstall")
-
-    local lspconfig = require("lspconfig")
-    -- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local lsp_attach = function(client, bufnr)
-      -- Add gopls specific formatting on save
-      if client.name == "gopls" then
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = vim.api.nvim_create_augroup("GoFormat", { clear = true }),
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format({ async = true })
-          end,
-        })
-      end
-      -- Create your keybindings here...
-    end
-
-    -- Configure gopls to handle .tmpl files
-    require("lspconfig").gopls.setup({
-      settings = {
-        filetypes = { "go", "gomod", "tmpl", "gotmpl", "templ" },
-        gopls = {
-          usePlaceholders = true,
-          gofumpt = true, -- If you prefer to use gofumpt for formatting
-        },
-      },
-      on_attach = lsp_attach, -- Ensure your on_attach function is used
-    })
-
-    -- Call setup on each LSP server
-    require("mason-lspconfig").setup_handlers({
-      function(server_name)
-        if server_name ~= "jdtls" then
-          lspconfig[server_name].setup({
-            on_attach = lsp_attach,
-            capabilities = lsp_capabilities,
-          })
-        end
-      end,
-    })
-
-    -- Lua LSP settings
-    lspconfig.lua_ls.setup({
-      settings = {
-        Lua = {
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
+      -- gopls: proper filetypes + settings
+      opts.servers.gopls = vim.tbl_deep_extend("force", opts.servers.gopls or {}, {
+        filetypes = { "go", "gomod", "gotmpl", "templ" },
+        settings = {
+          gopls = {
+            usePlaceholders = true,
+            gofumpt = true,
           },
         },
-      },
-    })
+      })
 
-    -- Jinja LSP settings
-    lspconfig.jinja_lsp.setup({
-      cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/jinja-lsp") }, -- Adjust the path if needed
-      filetypes = { "jinja", "html", "htmldjango", "j2" }, -- Ensure correct filetypes
-      root_dir = function(fname)
-        return lspconfig.util.find_git_ancestor(fname) or vim.loop.cwd()
-      end,
-      capabilities = lsp_capabilities,
-      on_attach = lsp_attach,
-    })
-  end,
+      -- Jinja LSP: enable only if executable exists to avoid Mason build (cargo) failures
+      local mason_bin = vim.fn.stdpath("data") .. "/mason/bin/jinja-lsp"
+      local has_path = vim.fn.executable("jinja-lsp") == 1
+      local has_mason_bin = vim.fn.filereadable(mason_bin) == 1
+      if has_path or has_mason_bin then
+        local jinja_cmd = has_mason_bin and { mason_bin } or nil
+        opts.servers.jinja_lsp = vim.tbl_deep_extend("force", opts.servers.jinja_lsp or {}, {
+          mason = false, -- don't try to auto-install
+          filetypes = { "jinja", "html", "htmldjango", "j2" },
+          cmd = jinja_cmd,
+        })
+      else
+        opts.servers.jinja_lsp = nil
+      end
+
+      return opts
+    end,
+  },
+
+  -- Ensure non-LSP tools are installed via mason
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      local tools = {
+        -- general
+        "stylua",
+        "shfmt",
+        "shellcheck",
+        -- go formatting
+        "gofumpt",
+        "goimports",
+        -- js linter
+        "quick-lint-js",
+        -- jinja/django template formatter
+        "djlint",
+        -- java extras
+        "java-debug-adapter",
+        "java-test",
+        -- ansible
+        "ansible-language-server",
+      }
+      for _, t in ipairs(tools) do
+        if not vim.tbl_contains(opts.ensure_installed, t) then
+          table.insert(opts.ensure_installed, t)
+        end
+      end
+    end,
+  },
 }

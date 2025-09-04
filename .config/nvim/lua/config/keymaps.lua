@@ -32,7 +32,20 @@ keymap.set("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>")
 keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
+-- Toggle diagnostics virtual lines for less noise when desired
+vim.keymap.set("n", "<leader>uV", function()
+  local cfg = vim.diagnostic.config()
+  local enabled = not (cfg.virtual_lines == true)
+  vim.diagnostic.config({ virtual_lines = enabled })
+  local ok, Snacks = pcall(require, "snacks")
+  if ok then
+    Snacks.notify((enabled and "Enabled" or "Disabled") .. " diagnostic virtual lines", { title = "Diagnostics" })
+  else
+    vim.notify((enabled and "Enabled" or "Disabled") .. " diagnostic virtual lines", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle diagnostic virtual lines" })
+-- Use nvim-cmp defaults for completion; avoid conflict with tmux navigation
+-- (was: insert-mode <C-Space> mapping)
 keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
 keymap.set("n", "<leader>qN", ":cprev<CR>") -- jump to prev quickfix list item
 
@@ -56,15 +69,16 @@ vim.keymap.set("n", "<leader>on", function()
   vim.cmd("ObsidianNew")
 end, { desc = "Obsidian: New Note" })
 vim.keymap.set("n", "<leader>ow", "<cmd>ObsidianDailies<CR>", { desc = "Obsidian: This Week" })
-vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Obsidian: This Week" })
+vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Obsidian: Search" })
 local wk = require("which-key")
 wk.add({
   -- File-related keymaps
   { "<leader>o", group = "Obsidian" },
-  { "<leader>t", desc = "Today" },
-  { "<leader>y", desc = "Yesterday" },
-  { "<leader>m", desc = "Tomorrow" },
-  { "<leader>w", desc = "This week" },
+  { "<leader>ot", desc = "Today" },
+  { "<leader>oy", desc = "Yesterday" },
+  { "<leader>om", desc = "Tomorrow" },
+  { "<leader>ow", desc = "This week" },
+  { "<leader>os", desc = "Search" },
 })
 local nvim_tmux_nav = require("nvim-tmux-navigation")
 
